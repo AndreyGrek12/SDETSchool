@@ -2,7 +2,6 @@ package pages;
 
 import helpers.Waiters;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,13 +18,13 @@ public class MessageListPage {
     @FindBy (xpath = "//div[@class='composeYabbles']")
     private WebElement destinationEmail;
 
-    @FindBy (css = ".composeTextField.ComposeSubject-TextField")
+    @FindBy (xpath = "//input[@name='subject']")
     private WebElement theme;
 
     @FindBy (xpath = "//div[@role='textbox']")
     private WebElement messageField;
 
-    @FindBy (css = ".Button2.Button2_pin_circle-circle.Button2_view_default.Button2_size_l")
+    @FindBy (xpath = "//button[@aria-disabled='false']")
     private WebElement sendMessage;
 
     @FindBy (css = ".ComposeDoneScreen-Header")
