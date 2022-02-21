@@ -16,8 +16,9 @@ class MailTest extends BaseTest {
         MessageListPage messageListPage = new MessageListPage(driver);
         loginPage.sendEmailInField()
                 .sendPasswordInField();
-        int startMessageCount = messageListPage.getMessageCountByTheme("Simbirsoft theme");
-        messageListPage.clickToCreateMessage()
+        messageListPage.inputSearch("папка:Входящие Simbirsoft theme");
+        int startMessageCount = messageListPage.getMessageCount();
+                messageListPage.clickToCreateMessage()
                 .inputEmail("andreygrek12@yandex.ru")
                 .inputTheme("Simbirsoft theme")
                 .inputMessage("Найдено ")
@@ -26,7 +27,7 @@ class MailTest extends BaseTest {
                 .sendMessage()
                 .waitForSending();
         driver.navigate().refresh();
-        int endMessageCount = messageListPage.getMessageCountByTheme("Simbirsoft theme");
+        int endMessageCount = messageListPage.getMessageCount();
         Assert.assertEquals(startMessageCount+1, endMessageCount, "Количество писем не изменилось");
     }
 }

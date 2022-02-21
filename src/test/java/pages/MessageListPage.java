@@ -3,6 +3,7 @@ package pages;
 import helpers.Waiters;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +31,12 @@ public class MessageListPage {
     @FindBy (css = ".ComposeDoneScreen-Header")
     private WebElement successSendingMessage;
 
+    @FindBy (xpath = "//input[@type='text']")
+    private WebElement searchField;
+
+    @FindBy (css = ".mail-MessagesSearchInfo-Title_misc.nb-with-xs-left-gap")
+    private WebElement searchResult;
+
     public MessageListPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -53,9 +60,10 @@ public class MessageListPage {
         return this;
     }
 
-    @Step ("Получение количества сообщений с заданной темой")
-    public int getMessageCountByTheme(String theme) {
-        return driver.findElements(By.xpath("//span[@title='" + theme + "']")).size();
+    @Step ("Получение количества сообщений")
+    public int getMessageCount() {
+        String[] result = searchResult.getText().split(" ");
+        return Integer.valueOf(result[0]);
     }
 
     @Step ("Ввод текста сообщения")
@@ -73,5 +81,12 @@ public class MessageListPage {
     @Step("Ожидание отправки сообщения")
     public void waitForSending () {
         Waiters.waitForVisibility(driver, successSendingMessage);
+    }
+
+    @Step("Поиск по сообщениям")
+    public MessageListPage inputSearch(String search) {
+        Waiters.waitForVisibility(driver, searchField);
+        searchField.sendKeys(search, Keys.ENTER);
+        return this;
     }
 }
