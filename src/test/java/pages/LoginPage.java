@@ -27,13 +27,15 @@ public class LoginPage{
     }
 
     @Step("Ввод email")
-    public void sendEmailInField() {
+    public LoginPage sendEmailInField() {
         eMailField.sendKeys(Data.getProperty("login"), Keys.ENTER);
+        return this;
     }
 
     @Step ("Ввод пароля")
-    public void sendPasswordInField() {
+    public LoginPage sendPasswordInField() {
         passwordField.sendKeys(Data.getProperty("password"), Keys.ENTER);
+        return this;
     }
 
 }

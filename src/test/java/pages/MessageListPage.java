@@ -12,22 +12,22 @@ public class MessageListPage {
 
     private final WebDriver driver;
 
-    @FindBy (xpath = "//a[@title='Написать (w, c)']")
+    @FindBy (css = ".mail-ComposeButton")
     private WebElement createMessage;
 
     @FindBy (xpath = "//div[@class='composeYabbles']")
     private WebElement destinationEmail;
 
-    @FindBy (xpath = "//input[@class='composeTextField ComposeSubject-TextField']")
+    @FindBy (css = ".composeTextField.ComposeSubject-TextField")
     private WebElement theme;
 
     @FindBy (xpath = "//div[@role='textbox']")
     private WebElement messageField;
 
-    @FindBy (xpath = "//button[@class='Button2 Button2_pin_circle-circle Button2_view_default Button2_size_l']")
+    @FindBy (css = ".Button2.Button2_pin_circle-circle.Button2_view_default.Button2_size_l")
     private WebElement sendMessage;
 
-    @FindBy (xpath = "//span[text()='Письмо отправлено']")
+    @FindBy (css = ".ComposeDoneScreen-Header")
     private WebElement successSendingMessage;
 
     public MessageListPage(WebDriver driver) {
@@ -36,18 +36,21 @@ public class MessageListPage {
     }
 
     @Step ("Нажатие кнопки создания сообщения")
-    public void clickToCreateMessage(){
+    public MessageListPage clickToCreateMessage(){
         createMessage.click();
+        return this;
     }
 
     @Step ("Ввод email в поле получателя")
-    public void inputEmail(){
-        destinationEmail.sendKeys("andreygrek12@yandex.ru");
+    public MessageListPage inputEmail(String email){
+        destinationEmail.sendKeys(email);
+        return this;
     }
 
     @Step ("Ввод темы письма")
-    public void inputTheme(String themeText) {
+    public MessageListPage inputTheme(String themeText) {
         theme.sendKeys(themeText);
+        return this;
     }
 
     @Step ("Получение количества сообщений с заданной темой")
@@ -56,13 +59,15 @@ public class MessageListPage {
     }
 
     @Step ("Ввод текста сообщения")
-    public void inputMessage (String message) {
+    public MessageListPage inputMessage (String message) {
         messageField.sendKeys(message);
+        return this;
     }
 
     @Step("Отправка сообщения")
-    public void sendMessage () {
+    public MessageListPage sendMessage () {
         sendMessage.click();
+        return this;
     }
 
     @Step("Ожидание отправки сообщения")

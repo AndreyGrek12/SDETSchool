@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,7 +14,7 @@ public abstract class BaseTest {
 
     @BeforeClass
     public void installDriver() {
-        System.setProperty("webdriver.chrome.driver", "/Users/macbook/Downloads/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
     }
 
     @BeforeMethod
